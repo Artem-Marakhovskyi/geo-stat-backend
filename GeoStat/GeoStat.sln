@@ -5,6 +5,14 @@ VisualStudioVersion = 15.0.27428.2015
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeoStat", "GeoStat\GeoStat.csproj", "{59F0CE1D-F401-43CD-A1A5-50E3AA2F7CB6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeoStat.DataAccess", "GeoStat.DataAccess\GeoStat.DataAccess.csproj", "{86809DEE-6D8A-4A60-AC08-9A0473199FA0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeoStat.Entities", "GeoStat.Entities\GeoStat.Entities.csproj", "{5EB78BDA-2C37-4A6E-AAAF-FC69B92EC58E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeoStat.BussinessLogic", "GeoStat.BussinessLogic\GeoStat.BussinessLogic.csproj", "{2E0D3C41-93BA-4C2C-BB68-12B8264D6E5B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeoStat.DTO", "GeoStat.DTO\GeoStat.DTO.csproj", "{72330C91-853A-476C-A5DF-4C02EC0154F7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +23,22 @@ Global
 		{59F0CE1D-F401-43CD-A1A5-50E3AA2F7CB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{59F0CE1D-F401-43CD-A1A5-50E3AA2F7CB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{59F0CE1D-F401-43CD-A1A5-50E3AA2F7CB6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86809DEE-6D8A-4A60-AC08-9A0473199FA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86809DEE-6D8A-4A60-AC08-9A0473199FA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86809DEE-6D8A-4A60-AC08-9A0473199FA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86809DEE-6D8A-4A60-AC08-9A0473199FA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EB78BDA-2C37-4A6E-AAAF-FC69B92EC58E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EB78BDA-2C37-4A6E-AAAF-FC69B92EC58E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EB78BDA-2C37-4A6E-AAAF-FC69B92EC58E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EB78BDA-2C37-4A6E-AAAF-FC69B92EC58E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E0D3C41-93BA-4C2C-BB68-12B8264D6E5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E0D3C41-93BA-4C2C-BB68-12B8264D6E5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E0D3C41-93BA-4C2C-BB68-12B8264D6E5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E0D3C41-93BA-4C2C-BB68-12B8264D6E5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72330C91-853A-476C-A5DF-4C02EC0154F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72330C91-853A-476C-A5DF-4C02EC0154F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72330C91-853A-476C-A5DF-4C02EC0154F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72330C91-853A-476C-A5DF-4C02EC0154F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

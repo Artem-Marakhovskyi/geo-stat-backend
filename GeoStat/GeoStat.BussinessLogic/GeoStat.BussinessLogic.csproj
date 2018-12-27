@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GeoStat.Entities\GeoStat.Entities.csproj" />
+    <ProjectReference Include="..\GeoStat.DataAccess\GeoStat.DataAccess.csproj" />
+    <ProjectReference Include="..\GeoStat.DTO\GeoStat.DTO.csproj" />
+  </ItemGroup>
+</Project>

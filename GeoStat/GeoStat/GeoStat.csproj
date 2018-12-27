@@ -13,4 +13,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GeoStat.BussinessLogic\GeoStat.BussinessLogic.csproj" />
+    <ProjectReference Include="..\GeoStat.DTO\GeoStat.DTO.csproj" />
+  </ItemGroup>
 </Project>

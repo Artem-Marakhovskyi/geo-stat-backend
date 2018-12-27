@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using GeoStat.DataAccess;
 
 namespace GeoStat.Controllers
 {
@@ -10,6 +11,14 @@ namespace GeoStat.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        private readonly GeoStatContext _context;
+        public ValuesController(GeoStatContext context)
+        {
+            _context = context;
+
+            _context.SaveChanges();
+        }
+
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()

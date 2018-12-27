@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GeoStat.BussinessLogic\GeoStat.BussinessLogic.csproj" />
+    <ProjectReference Include="..\GeoStat.DataAccess\GeoStat.DataAccess.csproj" />
     <ProjectReference Include="..\GeoStat.DTO\GeoStat.DTO.csproj" />
   </ItemGroup>
 </Project>

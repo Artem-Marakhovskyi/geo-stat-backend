@@ -16,5 +16,6 @@
   <ItemGroup>
     <ProjectReference Include="..\GeoStat.BussinessLogic\GeoStat.BussinessLogic.csproj" />
     <ProjectReference Include="..\GeoStat.DTO\GeoStat.DTO.csproj" />
+    <ProjectReference Include="..\GeoStat.CrossCutting\GeoStat.CrossCutting.csproj" />
   </ItemGroup>
 </Project>

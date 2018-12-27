@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeoStat.BussinessLogic", "G
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeoStat.DTO", "GeoStat.DTO\GeoStat.DTO.csproj", "{72330C91-853A-476C-A5DF-4C02EC0154F7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeoStat.CrossCutting", "GeoStat.CrossCutting\GeoStat.CrossCutting.csproj", "{DABDA487-FDA4-4FC9-BFC7-2C551A08E4A3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{72330C91-853A-476C-A5DF-4C02EC0154F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72330C91-853A-476C-A5DF-4C02EC0154F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{72330C91-853A-476C-A5DF-4C02EC0154F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DABDA487-FDA4-4FC9-BFC7-2C551A08E4A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DABDA487-FDA4-4FC9-BFC7-2C551A08E4A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DABDA487-FDA4-4FC9-BFC7-2C551A08E4A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DABDA487-FDA4-4FC9-BFC7-2C551A08E4A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

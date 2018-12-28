@@ -11,12 +11,8 @@ namespace GeoStat.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        private readonly GeoStatContext _context;
-        public ValuesController(GeoStatContext context)
+        public ValuesController()
         {
-            _context = context;
-
-            _context.SaveChanges();
         }
 
         // GET api/values

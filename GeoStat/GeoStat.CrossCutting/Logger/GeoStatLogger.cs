@@ -4,11 +4,11 @@ using NLog.Web;
 
 namespace GeoStat.CrossCutting.Logger
 {
-    public class GeoStatLogger<T> : IGeoStatLogger
+    public class GeoStatLogger : IGeoStatLogger
     {
-        private readonly ILogger<T> _logger;
+        private readonly ILogger _logger;
         
-        public GeoStatLogger(ILogger<T> logger)
+        public GeoStatLogger(ILogger logger)
         {
             _logger = logger;
         }

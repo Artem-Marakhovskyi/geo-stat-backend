@@ -12,18 +12,17 @@ namespace GeoStat.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        private GeoStatLogger<ValuesController> _geoStatLogger;
-        //private readonly ILogger<ValuesController> _logger;
-        public ValuesController(ILogger<ValuesController> logger )
+        private GeoStatLogger _geoStatLogger;
+        
+        public ValuesController(ILogger<ValuesController> logger)
         {
-            _geoStatLogger = new GeoStatLogger<ValuesController>(logger);
+            _geoStatLogger = new GeoStatLogger(logger);
         }
 
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            //_logger.LogInformation("~~~~~just a sample~~~~");
             _geoStatLogger.LogInfo( "~~~~~just a sample~~~~");
             return new string[] { "value1", "value2" };
         }

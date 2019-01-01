@@ -1,11 +1,12 @@
 ﻿using System;
 using Microsoft.Extensions.Logging;
-using NLog.Web;
+using NLog.Extensions.Logging;
 
 namespace GeoStat.CrossCutting.Logger
 {
     public class GeoStatLogger : IGeoStatLogger
     {
+        public static ILoggerFactory Factory { get; private set; }
         private readonly ILogger _logger;
         
         public GeoStatLogger(ILogger logger)
@@ -15,7 +16,8 @@ namespace GeoStat.CrossCutting.Logger
 
         static GeoStatLogger()
         {
-            NLogBuilder.ConfigureNLog("nlog.config");
+            NLog.LogManager.LoadConfiguration("nlog.config");
+            Factory = new NLogLoggerFactory();
         }
 
         public void LogError(string input, Exception ex, params object[] args)

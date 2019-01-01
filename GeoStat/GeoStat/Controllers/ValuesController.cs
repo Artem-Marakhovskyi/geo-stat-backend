@@ -14,9 +14,10 @@ namespace GeoStat.Controllers
     {
         private GeoStatLogger _geoStatLogger;
         
-        public ValuesController(ILogger<ValuesController> logger)
+        public ValuesController()
         {
-            _geoStatLogger = new GeoStatLogger(logger);
+            ILogger log = new Logger<ValuesController>(GeoStatLogger.Factory);
+            _geoStatLogger = new GeoStatLogger(log);
         }
 
         // GET api/values

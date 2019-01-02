@@ -48,7 +48,7 @@ namespace GeoStat
             });
 
             var logger = GeoStatLogger.Factory.CreateLogger("GeoStat");
-            services.AddSingleton<IGeoStatLogger>(new GeoStatLogger(logger));
+            services.AddScoped<IGeoStatLogger>(serviceProvider => new GeoStatLogger(logger));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

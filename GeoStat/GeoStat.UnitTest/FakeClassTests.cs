@@ -12,5 +12,10 @@ namespace UnitTest1
         {
             Assert.True(new FakeClass().FakeTrueMethod());
         }
+        [Test]
+        public void Should_Be_A_Problematic_Test()
+        {
+            Assert.False(new FakeClass().FakeTrueMethod());
+        }
     }
 }

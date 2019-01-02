@@ -3,17 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2015
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeoStat", "GeoStat\GeoStat.csproj", "{59F0CE1D-F401-43CD-A1A5-50E3AA2F7CB6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeoStat", "GeoStat\GeoStat.csproj", "{59F0CE1D-F401-43CD-A1A5-50E3AA2F7CB6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeoStat.DataAccess", "GeoStat.DataAccess\GeoStat.DataAccess.csproj", "{86809DEE-6D8A-4A60-AC08-9A0473199FA0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeoStat.DataAccess", "GeoStat.DataAccess\GeoStat.DataAccess.csproj", "{86809DEE-6D8A-4A60-AC08-9A0473199FA0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeoStat.Entities", "GeoStat.Entities\GeoStat.Entities.csproj", "{5EB78BDA-2C37-4A6E-AAAF-FC69B92EC58E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeoStat.Entities", "GeoStat.Entities\GeoStat.Entities.csproj", "{5EB78BDA-2C37-4A6E-AAAF-FC69B92EC58E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeoStat.BussinessLogic", "GeoStat.BussinessLogic\GeoStat.BussinessLogic.csproj", "{2E0D3C41-93BA-4C2C-BB68-12B8264D6E5B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeoStat.BussinessLogic", "GeoStat.BussinessLogic\GeoStat.BussinessLogic.csproj", "{2E0D3C41-93BA-4C2C-BB68-12B8264D6E5B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeoStat.DTO", "GeoStat.DTO\GeoStat.DTO.csproj", "{72330C91-853A-476C-A5DF-4C02EC0154F7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeoStat.DTO", "GeoStat.DTO\GeoStat.DTO.csproj", "{72330C91-853A-476C-A5DF-4C02EC0154F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeoStat.CrossCutting", "GeoStat.CrossCutting\GeoStat.CrossCutting.csproj", "{DABDA487-FDA4-4FC9-BFC7-2C551A08E4A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeoStat.CrossCutting", "GeoStat.CrossCutting\GeoStat.CrossCutting.csproj", "{DABDA487-FDA4-4FC9-BFC7-2C551A08E4A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeoStat.UnitTest", "GeoStat.UnitTest\GeoStat.UnitTest.csproj", "{867B4568-8337-416A-9924-BD28A6CAE211}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{DABDA487-FDA4-4FC9-BFC7-2C551A08E4A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DABDA487-FDA4-4FC9-BFC7-2C551A08E4A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DABDA487-FDA4-4FC9-BFC7-2C551A08E4A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{867B4568-8337-416A-9924-BD28A6CAE211}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{867B4568-8337-416A-9924-BD28A6CAE211}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{867B4568-8337-416A-9924-BD28A6CAE211}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{867B4568-8337-416A-9924-BD28A6CAE211}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

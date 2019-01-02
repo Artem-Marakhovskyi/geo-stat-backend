@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeoStat.DTO", "GeoStat.DTO\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeoStat.CrossCutting", "GeoStat.CrossCutting\GeoStat.CrossCutting.csproj", "{DABDA487-FDA4-4FC9-BFC7-2C551A08E4A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeoStat.UnitTest", "UnitTest1\GeoStat.UnitTest.csproj", "{867B4568-8337-416A-9924-BD28A6CAE211}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeoStat.UnitTest", "GeoStat.UnitTest\GeoStat.UnitTest.csproj", "{867B4568-8337-416A-9924-BD28A6CAE211}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

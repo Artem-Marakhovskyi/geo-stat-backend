@@ -12,12 +12,11 @@ namespace GeoStat.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        private GeoStatLogger _geoStatLogger;
+        private IGeoStatLogger _geoStatLogger;
         
-        public ValuesController()
+        public ValuesController(IGeoStatLogger logger)
         {
-            ILogger log = new Logger<ValuesController>(GeoStatLogger.Factory);
-            _geoStatLogger = new GeoStatLogger(log);
+            _geoStatLogger = logger;
         }
 
         // GET api/values

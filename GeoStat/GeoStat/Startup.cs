@@ -13,6 +13,7 @@ using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.EntityFrameworkCore;
 using GeoStat.DataAccess;
+using GeoStat.CrossCutting.Logger;
 
 namespace GeoStat
 {
@@ -45,6 +46,9 @@ namespace GeoStat
                     TermsOfService = "None",
                 });
             });
+
+            var logger = GeoStatLogger.Factory.CreateLogger("GeoStat");
+            services.AddScoped<IGeoStatLogger>(serviceProvider => new GeoStatLogger(logger));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

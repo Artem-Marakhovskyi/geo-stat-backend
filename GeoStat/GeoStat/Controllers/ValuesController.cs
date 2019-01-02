@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using GeoStat.CrossCutting.Logger;
 
 namespace GeoStat.Controllers
 {
@@ -10,14 +12,18 @@ namespace GeoStat.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        public ValuesController()
+        private IGeoStatLogger _geoStatLogger;
+        
+        public ValuesController(IGeoStatLogger logger)
         {
+            _geoStatLogger = logger;
         }
 
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
+            _geoStatLogger.LogInfo( "~~~~~just a sample~~~~");
             return new string[] { "value1", "value2" };
         }
 

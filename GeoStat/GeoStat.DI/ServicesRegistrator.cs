@@ -1,7 +1,10 @@
 ﻿using System.Configuration;
 using Autofac;
+using GeoStat.BussinessLogic;
 using GeoStat.CrossCutting.Logger;
 using GeoStat.DataAccess;
+using GeoStat.DTO;
+using Microsoft.Azure.Mobile.Server.Tables;
 using Microsoft.Extensions.Logging;
 
 namespace GeoStat.IoC
@@ -12,6 +15,12 @@ namespace GeoStat.IoC
         {
             RegisterLogger(builder);
             RegisterContext(builder);
+            RegisterDomainManagers(builder);
+        }
+
+        private void RegisterDomainManagers(ContainerBuilder builder)
+        {
+            builder.RegisterType<LocationDomainManager>().As<IDomainManager<LocationDto>>();
         }
 
         private void RegisterContext(ContainerBuilder builder)

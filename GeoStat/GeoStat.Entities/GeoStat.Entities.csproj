@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" />
+    <PackageReference Include="Microsoft.Azure.Mobile.Server.Entity" Version="2.0.3" />
   </ItemGroup>
 
 </Project>

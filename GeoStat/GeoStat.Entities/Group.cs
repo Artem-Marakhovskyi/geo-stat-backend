@@ -1,15 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
+﻿using System.Collections.Generic;
+using Microsoft.Azure.Mobile.Server;
 
 namespace GeoStat.Entities
 {
-    public class Group
+    public class Group : EntityData
     {
-        public int GroupId { get; set; }
         public string Label { get; set; }
+
+        public string CreatorId { get; set; }
+
         public User Creator { get; set; }
+
         public ICollection<GroupUser> GroupUsers { get; set; }
     }
 }

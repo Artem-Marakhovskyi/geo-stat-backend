@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.Azure.Mobile.Server;
 
-namespace GeoStat.Entities
+namespace GeoStat.DTO
 {
-    public class Location : EntityData
+    public class LocationDto : EntityData
     {
         public float Latitude { get; set; }
 
@@ -12,7 +12,5 @@ namespace GeoStat.Entities
         public DateTimeOffset DateTime { get; set; }
 
         public string UserId { get; set; }
-
-        public User User { get; set; }
     }
 }

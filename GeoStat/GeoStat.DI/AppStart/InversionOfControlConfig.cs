@@ -15,9 +15,9 @@ namespace GeoStat.IoC.AppStart
             HttpConfiguration config,
             Assembly assemblyWithControllers)
         {
-            var container = GetContainer(assemblyWithControllers);
+            var container = GetContainer(assemblyWithControllers, config);
 
-            config.DependencyResolver = new DependencyResolver(new AutofacWebApiDependencyResolver(container));
+            config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
 
             app.UseAutofacMiddleware(container);
 
@@ -26,11 +26,13 @@ namespace GeoStat.IoC.AppStart
         }
 
         private static IContainer GetContainer(
-            Assembly assemblyWithControllers)
+            Assembly assemblyWithControllers,
+            HttpConfiguration config)
         {
             var builder = new ContainerBuilder();
 
             builder.RegisterApiControllers(assemblyWithControllers);
+            builder.RegisterHttpRequestMessage(config);
 
             new ServicesRegistrator().Register(builder);
 

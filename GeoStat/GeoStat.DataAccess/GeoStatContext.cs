@@ -1,19 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Data.Entity;
 using GeoStat.Entities;
 
 namespace GeoStat.DataAccess
 {
     public class GeoStatContext: DbContext
     {
-        public GeoStatContext(DbContextOptions<GeoStatContext> options) : base(options)
+        public GeoStatContext(string connectionString) : base(connectionString)
         {
-            Database.EnsureCreated();
+            Database.CreateIfNotExists();
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<GroupUser>().HasKey(sc => new { sc.UserId, sc.GroupId });
         }

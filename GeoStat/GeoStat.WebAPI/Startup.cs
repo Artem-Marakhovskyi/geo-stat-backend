@@ -1,61 +1,39 @@
-﻿using GeoStat.CrossCutting.Logger;
-using GeoStat.DataAccess;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using GeoStat.IoC.AppStart;
+using Microsoft.Azure.Mobile.Server.Config;
+using Microsoft.Azure.Mobile.Server.Tables.Config;
+using Microsoft.Owin;
+using Owin;
+using System.Reflection;
+using System.Web.Http;
+
+[assembly: OwinStartup(typeof(GeoStat.WebAPI.Startup))]
 
 namespace GeoStat.WebAPI
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public void Configuration(IAppBuilder appBuilder)
         {
-            Configuration = configuration;
+            var config = new HttpConfiguration();
+
+            SwaggerConfig.Register(config);
+            InversionOfControlConfig.Initialize(appBuilder, config, Assembly.GetExecutingAssembly());
+            ConfigureMobileApp(appBuilder, config);
         }
 
-        public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public virtual void ConfigureMobileApp(IAppBuilder appBuilder, HttpConfiguration config)
         {
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            new MobileAppConfiguration()
+                .MapApiControllers()
+                .AddTables(
+                    new MobileAppTableConfiguration()
+                        .MapTableControllers()
+                        .AddEntityFramework()
+                )
+                .ApplyTo(config);
 
-            services.AddDbContext<GeoStatContext>
-                    (opt => opt.UseSqlServer(connectionString));
-
-            services.AddMvc();
-
-            
-
-            var logger = GeoStatLogger.Factory.CreateLogger("GeoStat");
-            services.AddScoped<IGeoStatLogger>(serviceProvider => new GeoStatLogger(logger));
-        }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-        {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseHsts();
-            }
-
-            app.UseSwagger();
-
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-                c.RoutePrefix = "swagger";
-            });
-
-            app.UseHttpsRedirection();
-            app.UseMvc();
+            appBuilder.UseWebApi(config);
+            config.MapHttpAttributeRoutes();
         }
     }
 }

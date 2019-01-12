@@ -8,10 +8,17 @@ using Swashbuckle.Swagger.Annotations;
 
 namespace GeoStat.WebAPI.Controllers
 {
+    [Route("api/values")]
     public class ValuesController : ApiController
     {
+        public ValuesController()
+        {
+
+        }
+
         // GET api/values
         [SwaggerOperation("GetAll")]
+        [HttpGet]
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };

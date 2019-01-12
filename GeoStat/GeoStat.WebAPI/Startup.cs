@@ -28,16 +28,7 @@ namespace GeoStat.WebAPI
 
             services.AddMvc();
 
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new Info
-                {
-                    Version = "v1",
-                    Title = "GeoStat API",
-                    Description = "A simple example ASP.NET Core Web API",
-                    TermsOfService = "None",
-                });
-            });
+            
 
             var logger = GeoStatLogger.Factory.CreateLogger("GeoStat");
             services.AddScoped<IGeoStatLogger>(serviceProvider => new GeoStatLogger(logger));

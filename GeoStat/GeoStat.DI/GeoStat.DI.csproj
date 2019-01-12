@@ -8,6 +8,7 @@
     <PackageReference Include="Autofac.WebApi2.Owin" Version="4.0.0" />
     <PackageReference Include="Autofac" Version="4.8.1" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0" />
+    <PackageReference Include="Autofac.WebApi2" Version="4.2.0" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AppStart\" />

@@ -24,15 +24,7 @@ namespace GeoStat.WebAPI.Controllers
             return new string[] { "value1", "value2" };
         }
 
-        // GET api/values/5
-        [SwaggerOperation("GetById")]
-        [SwaggerResponse(HttpStatusCode.OK)]
-        [SwaggerResponse(HttpStatusCode.NotFound)]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
+       
         // POST api/values
         [SwaggerOperation("Create")]
         [SwaggerResponse(HttpStatusCode.Created)]

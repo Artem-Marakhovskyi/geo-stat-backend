@@ -1,4 +1,4 @@
-﻿using GeoStat.IoC.AppStart;
+﻿using GeoStat.DI.AppStart;
 using Microsoft.Azure.Mobile.Server.Config;
 using Microsoft.Azure.Mobile.Server.Tables.Config;
 using Microsoft.Owin;

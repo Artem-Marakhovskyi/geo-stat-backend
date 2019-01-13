@@ -1,12 +1,11 @@
-﻿using System;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Web.Http;
 using Autofac;
 using Autofac.Integration.WebApi;
-using GeoStat.DI.AppStart;
+using GeoStat.IoC;
 using Owin;
 
-namespace GeoStat.IoC.AppStart
+namespace GeoStat.DI.AppStart
 {
     public class InversionOfControlConfig
     {

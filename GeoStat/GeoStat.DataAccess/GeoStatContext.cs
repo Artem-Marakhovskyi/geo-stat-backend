@@ -1,5 +1,8 @@
 ﻿using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
+using System.Linq;
 using GeoStat.Entities;
+using Microsoft.Azure.Mobile.Server.Tables;
 
 namespace GeoStat.DataAccess
 {
@@ -11,6 +14,10 @@ namespace GeoStat.DataAccess
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Conventions.Add(
+                new AttributeToColumnAnnotationConvention<TableColumnAttribute, string>(
+                    "ServiceTableColumn",
+                    (property, attributes) => attributes.Single().ColumnType.ToString()));
         }
 
         public DbSet<User> Users { get; set; }

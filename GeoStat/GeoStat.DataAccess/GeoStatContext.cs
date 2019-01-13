@@ -7,12 +7,10 @@ namespace GeoStat.DataAccess
     {
         public GeoStatContext(string connectionString) : base(connectionString)
         {
-            Database.CreateIfNotExists();
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<GroupUser>().HasKey(sc => new { sc.UserId, sc.GroupId });
         }
 
         public DbSet<User> Users { get; set; }

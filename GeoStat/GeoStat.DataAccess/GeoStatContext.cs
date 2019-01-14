@@ -1,23 +1,22 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
+using System.Linq;
 using GeoStat.Entities;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-
+using Microsoft.Azure.Mobile.Server.Tables;
 namespace GeoStat.DataAccess
 {
     public class GeoStatContext : IdentityDbContext<User>
     {
-        public GeoStatContext(DbContextOptions<GeoStatContext> options) : base(options)
+        public GeoStatContext(string connectionString) : base(connectionString)
         {
-            Database.EnsureCreated();
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<GroupUser>().HasKey(sc => new { sc.UserId, sc.GroupId });
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.Conventions.Add(
+                new AttributeToColumnAnnotationConvention<TableColumnAttribute, string>(
+                    "ServiceTableColumn",
+                    (property, attributes) => attributes.Single().ColumnType.ToString()));
         }
 
         public DbSet<Location> Locations { get; set; }

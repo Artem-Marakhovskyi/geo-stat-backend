@@ -15,7 +15,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeoStat.DTO", "GeoStat.DTO\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeoStat.CrossCutting", "GeoStat.CrossCutting\GeoStat.CrossCutting.csproj", "{DABDA487-FDA4-4FC9-BFC7-2C551A08E4A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeoStat.UnitTest", "GeoStat.UnitTest\GeoStat.UnitTest.csproj", "{867B4568-8337-416A-9924-BD28A6CAE211}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeoStat.UnitTest", "GeoStat.UnitTest\GeoStat.UnitTest.csproj", "{867B4568-8337-416A-9924-BD28A6CAE211}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeoStat.WebAPI", "GeoStat.WebAPI\GeoStat.WebAPI.csproj", "{A66EFB12-3C39-41C1-B5BA-8C72DED6D701}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeoStat.DI", "GeoStat.DI\GeoStat.DI.csproj", "{C120EEC4-FFCB-4E66-A72C-C459D8F78BD7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +55,14 @@ Global
 		{867B4568-8337-416A-9924-BD28A6CAE211}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{867B4568-8337-416A-9924-BD28A6CAE211}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{867B4568-8337-416A-9924-BD28A6CAE211}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A66EFB12-3C39-41C1-B5BA-8C72DED6D701}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A66EFB12-3C39-41C1-B5BA-8C72DED6D701}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A66EFB12-3C39-41C1-B5BA-8C72DED6D701}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A66EFB12-3C39-41C1-B5BA-8C72DED6D701}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C120EEC4-FFCB-4E66-A72C-C459D8F78BD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C120EEC4-FFCB-4E66-A72C-C459D8F78BD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C120EEC4-FFCB-4E66-A72C-C459D8F78BD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C120EEC4-FFCB-4E66-A72C-C459D8F78BD7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

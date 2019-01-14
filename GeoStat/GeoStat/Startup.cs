@@ -14,6 +14,10 @@ using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.EntityFrameworkCore;
 using GeoStat.DataAccess;
 using GeoStat.CrossCutting.Logger;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI;
+using GeoStat.Entities;
 
 namespace GeoStat
 {
@@ -29,12 +33,24 @@ namespace GeoStat
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             services.AddDbContext<GeoStatContext>
                     (opt => opt.UseSqlServer(connectionString));
 
+            services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<GeoStatContext>();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            
 
             services.AddSwaggerGen(c =>
             {
@@ -57,9 +73,11 @@ namespace GeoStat
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseDatabaseErrorPage();
             }
             else
             {
+                app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
             
@@ -72,6 +90,11 @@ namespace GeoStat
             });
 
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
+            app.UseCookiePolicy();
+
+            app.UseAuthentication();
+
             app.UseMvc();
         }
     }

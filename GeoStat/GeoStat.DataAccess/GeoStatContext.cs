@@ -3,10 +3,9 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using GeoStat.Entities;
 using Microsoft.Azure.Mobile.Server.Tables;
-
 namespace GeoStat.DataAccess
 {
-    public class GeoStatContext: DbContext
+    public class GeoStatContext : IdentityDbContext<User>
     {
         public GeoStatContext(string connectionString) : base(connectionString)
         {
@@ -20,7 +19,6 @@ namespace GeoStat.DataAccess
                     (property, attributes) => attributes.Single().ColumnType.ToString()));
         }
 
-        public DbSet<User> Users { get; set; }
         public DbSet<Location> Locations { get; set; }
         public DbSet<Group> Groups { get; set; }
         public DbSet<GroupUser> GroupUsers { get; set; }

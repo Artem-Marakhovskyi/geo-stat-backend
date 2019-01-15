@@ -1,5 +1,4 @@
-﻿using System;
-using GeoStat.BussinessLogic;
+﻿using GeoStat.BussinessLogic;
 using NUnit.Framework;
 
 namespace UnitTest1

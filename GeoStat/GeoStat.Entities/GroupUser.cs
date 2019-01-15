@@ -6,7 +6,7 @@ namespace GeoStat.Entities
     {
         public int UserId { get; set; }
 
-        public User User { get; set; }
+        public GeoStatUser User { get; set; }
 
         public int GroupId { get; set; }
 

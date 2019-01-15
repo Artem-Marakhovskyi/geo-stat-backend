@@ -1,5 +1,4 @@
-﻿using System;
-namespace GeoStat.BussinessLogic
+﻿namespace GeoStat.BussinessLogic
 {
     public class FakeClass
     {

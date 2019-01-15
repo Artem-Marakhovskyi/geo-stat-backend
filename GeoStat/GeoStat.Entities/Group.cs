@@ -9,7 +9,7 @@ namespace GeoStat.Entities
 
         public string CreatorId { get; set; }
 
-        public User Creator { get; set; }
+        public GeoStatUser Creator { get; set; }
 
         public ICollection<GroupUser> GroupUsers { get; set; }
     }

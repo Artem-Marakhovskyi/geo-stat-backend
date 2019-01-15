@@ -5,6 +5,11 @@ using Microsoft.Owin;
 using Owin;
 using System.Reflection;
 using System.Web.Http;
+using GeoStat.WebAPI;
+using GeoStat.DataAccess;
+using GeoStat.WebAPI.Models;
+using Microsoft.Owin.Security.Cookies;
+using Microsoft.AspNet.Identity;
 
 [assembly: OwinStartup(typeof(GeoStat.WebAPI.Startup))]
 
@@ -15,6 +20,14 @@ namespace GeoStat.WebAPI
         public void Configuration(IAppBuilder appBuilder)
         {
             var config = new HttpConfiguration();
+
+            appBuilder.CreatePerOwinContext<GeoStatContext>(GeoStatContext.Create);
+            appBuilder.CreatePerOwinContext<GeoStatUserManager>(GeoStatUserManager.Create);
+            appBuilder.UseCookieAuthentication(new CookieAuthenticationOptions
+            {
+                AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
+                LoginPath = new PathString("/Account/Login"),
+            });
 
             SwaggerConfig.Register(config);
             InversionOfControlConfig.Initialize(appBuilder, config, Assembly.GetExecutingAssembly());

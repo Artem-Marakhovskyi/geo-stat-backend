@@ -4,6 +4,7 @@ using System.Linq;
 using GeoStat.Entities;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Azure.Mobile.Server.Tables;
+
 namespace GeoStat.DataAccess
 {
     public class GeoStatContext : IdentityDbContext<User>
@@ -12,7 +13,12 @@ namespace GeoStat.DataAccess
         {
 
         }
-       
+        
+        public static GeoStatContext Create()
+        {
+            return new GeoStatContext("MS_TableConnectionString");
+        }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

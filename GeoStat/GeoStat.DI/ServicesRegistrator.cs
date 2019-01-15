@@ -1,5 +1,4 @@
-﻿using System;
-using System.Configuration;
+﻿using System.Configuration;
 using Autofac;
 using AutoMapper;
 using GeoStat.BussinessLogic;
@@ -28,12 +27,14 @@ namespace GeoStat.IoC
                 c => 
                 {
                     c.CreateMap<LocationDto, Location>().ReverseMap();
+                    c.CreateMap<GeoStatUserDto, GeoStatUser>().ReverseMap();
                 });
         }
 
         private void RegisterDomainManagers(ContainerBuilder builder)
         {
             builder.RegisterType<LocationDomainManager>().As<IDomainManager<LocationDto>>();
+            builder.RegisterType<GeoStatUserDomainManager>().As<IDomainManager<GeoStatUserDto>>();
         }
 
         private void RegisterContext(ContainerBuilder builder)

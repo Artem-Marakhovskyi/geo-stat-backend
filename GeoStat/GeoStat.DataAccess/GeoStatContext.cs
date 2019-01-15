@@ -26,5 +26,6 @@ namespace GeoStat.DataAccess
         public DbSet<Location> Locations { get; set; }
         public DbSet<Group> Groups { get; set; }
         public DbSet<GroupUser> GroupUsers { get; set; }
+        public DbSet<GeoStatUser> GeoStatUsers { get; set; }
     }
 }

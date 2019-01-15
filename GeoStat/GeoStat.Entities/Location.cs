@@ -13,6 +13,6 @@ namespace GeoStat.Entities
 
         public string UserId { get; set; }
 
-        public User User { get; set; }
+        public GeoStatUser User { get; set; }
     }
 }

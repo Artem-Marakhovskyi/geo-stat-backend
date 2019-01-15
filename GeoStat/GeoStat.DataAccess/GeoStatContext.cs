@@ -2,6 +2,7 @@
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using GeoStat.Entities;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Azure.Mobile.Server.Tables;
 namespace GeoStat.DataAccess
 {
@@ -9,8 +10,9 @@ namespace GeoStat.DataAccess
     {
         public GeoStatContext(string connectionString) : base(connectionString)
         {
-        }
 
+        }
+       
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Add(

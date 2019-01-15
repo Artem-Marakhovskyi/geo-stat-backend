@@ -28,6 +28,8 @@ namespace GeoStat.IoC
                 {
                     c.CreateMap<LocationDto, Location>().ReverseMap();
                     c.CreateMap<GeoStatUserDto, GeoStatUser>().ReverseMap();
+                    c.CreateMap<GroupDto, Group>().ReverseMap();
+                    c.CreateMap<GroupUserDto, GroupUser>().ReverseMap();
                 });
         }
 
@@ -35,6 +37,8 @@ namespace GeoStat.IoC
         {
             builder.RegisterType<LocationDomainManager>().As<IDomainManager<LocationDto>>();
             builder.RegisterType<GeoStatUserDomainManager>().As<IDomainManager<GeoStatUserDto>>();
+            builder.RegisterType<GroupUserDomainManager>().As<IDomainManager<GroupUserDto>>();
+            builder.RegisterType<GroupDomainManager>().As<IDomainManager<GroupDto>>();
         }
 
         private void RegisterContext(ContainerBuilder builder)

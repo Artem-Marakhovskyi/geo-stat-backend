@@ -20,9 +20,7 @@ namespace GeoStat.WebAPI
         public void Configuration(IAppBuilder appBuilder)
         {
             var config = new HttpConfiguration();
-
-            appBuilder.CreatePerOwinContext<GeoStatContext>(GeoStatContext.Create);
-            appBuilder.CreatePerOwinContext<GeoStatUserManager>(GeoStatUserManager.Create);
+            
             appBuilder.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,

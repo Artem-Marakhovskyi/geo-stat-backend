@@ -13,11 +13,6 @@ namespace GeoStat.DataAccess
         {
 
         }
-        
-        public static GeoStatContext Create()
-        {
-            return new GeoStatContext("MS_TableConnectionString");
-        }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

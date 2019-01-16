@@ -1,14 +1,14 @@
 ﻿using Microsoft.Azure.Mobile.Server;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using System.ComponentModel.DataAnnotations;
 
 namespace GeoStat.DTO
 {
     public class GroupDto : EntityData
     {
+        [Required]
         public string Label { get; set; }
 
+        [Required]
         public string CreatorId { get; set; }
     }
 }

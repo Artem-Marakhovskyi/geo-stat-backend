@@ -19,7 +19,5 @@ namespace GeoStat.DTO
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
         public string PasswordConfirm { get; set; }
-
-        public bool RememberMe { get; set; }
     }
 }

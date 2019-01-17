@@ -5,9 +5,9 @@ namespace GeoStat.Entities
 {
     public class Location : EntityData
     {
-        public float Latitude { get; set; }
+        public double Latitude { get; set; }
 
-        public float Longitude { get; set; }
+        public double Longitude { get; set; }
 
         public DateTimeOffset DateTime { get; set; }
 

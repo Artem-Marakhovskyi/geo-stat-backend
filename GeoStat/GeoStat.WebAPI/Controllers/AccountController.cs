@@ -13,7 +13,7 @@ using Microsoft.Azure.Mobile.Server.Tables;
 
 namespace GeoStat.WebAPI.Controllers
 {
-    [Route("api/values")]
+    [Route("api/account")]
     public class AccountController : ApiController
     {
 

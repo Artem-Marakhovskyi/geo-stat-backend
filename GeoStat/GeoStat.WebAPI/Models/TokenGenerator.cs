@@ -1,34 +1,51 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using GeoStat.BussinessLogic;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Protocols.WSTrust;
 using System.IdentityModel.Tokens;
 using System.Linq;
 using System.Security.Claims;
 using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 
 namespace GeoStat.WebAPI.Models
 {
     public class TokenGenerator
-    {
-        private static string Secret = "XCAP05H6LoKvbRRa/QkqLNMI7cOHguaRyHzyg7n5qEkGjQmtBhz4SzYh4Fqwjyi3KJHlSXKPwVu2+bXr6CtpgQ==";
+    { 
+        private const string communicationKey = "GQDstc21ewfffffffffffFiwDffVvVBrk";
 
-        public static string GenerateToken(string username)
+        readonly System.IdentityModel.Tokens.SecurityKey signingKey = new InMemorySymmetricSecurityKey(Encoding.UTF8.GetBytes(communicationKey));
+
+        public string GenerateToken(string userName, string userId)
         {
-            byte[] key = Convert.FromBase64String(Secret);
-            Microsoft.IdentityModel.Tokens.SymmetricSecurityKey securityKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(key);
-            Microsoft.IdentityModel.Tokens.SecurityTokenDescriptor descriptor = new Microsoft.IdentityModel.Tokens.SecurityTokenDescriptor
+            var signingKey = new InMemorySymmetricSecurityKey(Encoding.UTF8.GetBytes(communicationKey));
+            var now = DateTime.UtcNow;
+            var signingCredentials = new System.IdentityModel.Tokens.SigningCredentials(signingKey,
+               System.IdentityModel.Tokens.SecurityAlgorithms.HmacSha256Signature, System.IdentityModel.Tokens.SecurityAlgorithms.Sha256Digest);
+
+            var claimsIdentity = new ClaimsIdentity(new List<Claim>()
             {
-                Subject = new ClaimsIdentity(new[] {
-                      new Claim(ClaimTypes.Name, username)}),
-                Expires = DateTime.UtcNow.AddMinutes(30),
-                SigningCredentials = new Microsoft.IdentityModel.Tokens.SigningCredentials(securityKey,
-                Microsoft.IdentityModel.Tokens.SecurityAlgorithms.HmacSha256Signature)
+                new Claim(ClaimTypes.Name, userName),
+                new Claim(ClaimTypes.NameIdentifier, userId)
+            });
+
+            var securityTokenDescriptor = new System.IdentityModel.Tokens.SecurityTokenDescriptor()
+            {
+                Subject = claimsIdentity,
+                SigningCredentials = signingCredentials,
+                Lifetime = new Lifetime(now, now.AddMonths(1)),
             };
 
-            JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
-            JwtSecurityToken token = handler.CreateJwtScurityToken(descriptor);
-            return handler.WriteToken(token);
+            var tokenHandler = new JwtSecurityTokenHandler();
+
+            var plainToken = tokenHandler.CreateToken(securityTokenDescriptor);
+            var signedAndEncodedToken = tokenHandler.WriteToken(plainToken);
+
+            Console.WriteLine(signedAndEncodedToken);
+            return signedAndEncodedToken;
+
         }
     }
 }

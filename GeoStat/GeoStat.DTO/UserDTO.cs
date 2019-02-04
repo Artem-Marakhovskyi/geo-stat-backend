@@ -3,15 +3,11 @@ using Microsoft.Azure.Mobile.Server;
 
 namespace GeoStat.DTO
 {
-    public class UserDTO : EntityData
+    public class UserDTO : AuthorisationUserDTO
     {
-        //[Required]
-        //[Display(Name = "Email")]
-        public string Email { get; set; }
-
-        //[Required]
-        //[DataType(DataType.Password)]
-        //[Display(Name = "Password")]
-        public string Password { get; set; }
+        [Required(ErrorMessage = "Confirm Password is required")]
+        [DataType(DataType.Password)]
+        [Compare("Password")]
+        public string RepeatPassword { get; set; }
     }
 }

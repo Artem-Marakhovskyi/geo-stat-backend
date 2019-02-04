@@ -43,7 +43,8 @@ namespace GeoStat.WebAPI.Models
             var plainToken = tokenHandler.CreateToken(securityTokenDescriptor);
             var signedAndEncodedToken = tokenHandler.WriteToken(plainToken);
 
-            Console.WriteLine(signedAndEncodedToken);
+            var test = new AuthorisedInAttribute();
+            bool response = test.IsValid(signedAndEncodedToken);
             return signedAndEncodedToken;
 
         }

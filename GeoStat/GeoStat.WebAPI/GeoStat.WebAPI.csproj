@@ -301,6 +301,7 @@
     <Compile Include="Controllers\GroupUserController.cs" />
     <Compile Include="Controllers\GroupController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Models\AuthorisedInAttribute.cs" />
     <Compile Include="Models\JsonGenerator.cs" />
     <Compile Include="Models\TokenGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

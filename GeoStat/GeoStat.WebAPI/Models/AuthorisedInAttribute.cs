@@ -5,36 +5,40 @@ using System.IdentityModel.Tokens;
 using System.Linq;
 using System.Text;
 using System.Web;
+using System.Web.Http;
+using System.Web.Http.Controllers;
+using System.Web.Http.Filters;
 
 namespace GeoStat.WebAPI.Models
 {
-    public class AuthorisedInAttribute : ValidationAttribute 
+    public class AuthorisedInAttribute : ActionFilterAttribute, IActionFilter
     {
-        public AuthorisedInAttribute()
+        public override void OnActionExecuting(HttpActionContext actionContext)
         {
-
-        }
-        public override bool IsValid(object value)
-        {
-            if(value != null)
+            if (actionContext.ActionArguments.Count != 0)
             {
-                var token = value as string;
-                string secret = "GQDstc21ewfffffffffffFiwDffVvVBrk";
-                var key = Encoding.ASCII.GetBytes(secret);
-                var handler = new JwtSecurityTokenHandler();
-                var tokenSecure = handler.ReadToken(token) as SecurityToken;
-                var validations = new TokenValidationParameters
+                var token = actionContext.ActionArguments.First().Value.ToString();
+                if (token != null)
                 {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new InMemorySymmetricSecurityKey(key),
-                    ValidateIssuer = false,
-                    ValidateAudience = false
-                };
-                var claims = handler.ValidateToken(token, validations, out tokenSecure);
-                var a = claims.Identities;
-                return true;
+                    string secret = "GQDstc21ewfffffffffffFiwDffVvVBrk";
+                    var key = Encoding.ASCII.GetBytes(secret);
+                    var handler = new JwtSecurityTokenHandler();
+                    var tokenSecure = handler.ReadToken(token) as SecurityToken;
+                    var validations = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new InMemorySymmetricSecurityKey(key),
+                        ValidateIssuer = false,
+                        ValidateAudience = false
+                    };
+                    if (DateTime.Now < tokenSecure.ValidTo)
+                    {
+                        ///redirecttoaction 
+                    }
+                }
+                //return 
             }
-            return false;
+            OnActionExecuting(actionContext);
         }
     }
 }

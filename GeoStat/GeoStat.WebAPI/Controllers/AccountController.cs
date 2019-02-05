@@ -4,6 +4,7 @@ using System.IdentityModel.Tokens;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
@@ -95,5 +96,13 @@ namespace GeoStat.WebAPI.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
             }
         }
+
+        //[AuthorisedIn]
+        //[HttpPost]
+        //[Route("api/account/register/checkattr")]
+        //public async Task<HttpResponseMessage> checkattr(string token)
+        //{
+            
+        //}
     }
 }

@@ -274,9 +274,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Web.config">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="Global.asax" />
+    <Content Include="Web.config" />
     <Content Include="nlog.config">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -293,6 +292,10 @@
     <Compile Include="Models\JsonGenerator.cs" />
     <Compile Include="Models\TokenGenerator.cs" />
     <Compile Include="Models\TokenizedResponse.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GeoStatUserManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Controllers\LocationController.cs" />

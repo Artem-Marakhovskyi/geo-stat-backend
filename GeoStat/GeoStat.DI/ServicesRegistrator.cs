@@ -40,7 +40,7 @@ namespace GeoStat.IoC
         private void RegisterDomainManagers(ContainerBuilder builder)
         {
             builder.RegisterType<LocationDomainManager>().As<IDomainManager<LocationDto>>();
-            builder.RegisterType<GeoStatUserDomainManager>().As<GeoStatUserDomainManager>();
+            builder.RegisterType<GeoStatUserDomainManager>().As<IGeoStatUserDomainManager>();
             builder.RegisterType<GroupUserDomainManager>().As<IDomainManager<GroupUserDto>>();
             builder.RegisterType<GroupDomainManager>().As<IDomainManager<GroupDto>>();
             builder.RegisterType<AccountDomainManager>().As<IAccountDomainManager>();

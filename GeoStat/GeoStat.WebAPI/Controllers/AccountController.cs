@@ -13,6 +13,7 @@ using GeoStat.BussinessLogic.Interfaces;
 using GeoStat.DataAccess;
 using GeoStat.DTO;
 using GeoStat.Entities;
+using static GeoStat.BussinessLogic.Helpers.Response;
 using GeoStat.WebAPI.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -45,9 +46,9 @@ namespace GeoStat.WebAPI.Controllers
             if(ModelState.IsValid)
             {
                 var registration = await _accountDomainManager.Register(model);
-                if (registration != "ok")
+                if (registration.CustomResponse != Responses.Success)
                 {
-                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, registration);
+                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, registration.ResponseString);
                 }
 
                 var registratedUserId = await _accountDomainManager.FindUserId(model);
@@ -76,9 +77,9 @@ namespace GeoStat.WebAPI.Controllers
             {
                 var authorisation = await _accountDomainManager.Authorise(model);
 
-                if (authorisation != "ok")
+                if (authorisation.CustomResponse != Responses.Success)
                 {
-                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, authorisation);
+                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, authorisation.ResponseString);
                 }
 
                 var authorisedUserId = await _accountDomainManager.FindUserId(model);
@@ -96,13 +97,5 @@ namespace GeoStat.WebAPI.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
             }
         }
-
-        //[AuthorisedIn]
-        //[HttpPost]
-        //[Route("api/account/register/checkattr")]
-        //public async Task<HttpResponseMessage> checkattr(string token)
-        //{
-            
-        //}
     }
 }

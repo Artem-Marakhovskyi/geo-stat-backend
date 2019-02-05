@@ -267,6 +267,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Global.asax" />
     <Content Include="Web.config" />
     <Content Include="nlog.config">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
@@ -280,6 +281,9 @@
     <Compile Include="Controllers\GroupUserController.cs" />
     <Compile Include="Controllers\GroupController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
     <Compile Include="Models\GeoStatUserManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />

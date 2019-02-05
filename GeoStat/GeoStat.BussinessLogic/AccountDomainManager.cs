@@ -1,30 +1,25 @@
-﻿using GeoStat.BussinessLogic.Interfaces;
-using GeoStat.DataAccess;
+﻿using GeoStat.BussinessLogic.Helpers;
+using GeoStat.BussinessLogic.Interfaces;
 using GeoStat.DTO;
 using GeoStat.Entities;
 using Microsoft.AspNet.Identity;
-using System.Linq;
-using Microsoft.Azure.Mobile.Server.Tables;
-using System;
 using System.Collections.Generic;
-using System.Net.Http;
-using System.Text;
+using System.Linq;
 using System.Threading.Tasks;
-using System.Web.Http.OData.Query;
-using System.Web.Http;
+using static GeoStat.BussinessLogic.Helpers.Response;
 
 namespace GeoStat.BussinessLogic
 {
     public class AccountDomainManager : IAccountDomainManager
     {
-        private readonly GeoStatUserDomainManager _geostatUserDomainManager;
+        private readonly IGeoStatUserDomainManager _geostatUserDomainManager;
         private readonly UserDomainManager _userDomainManager;
 
-        public AccountDomainManager(GeoStatUserDomainManager geostatUserDomainManager, UserDomainManager userDomainManager)
+        public AccountDomainManager(IGeoStatUserDomainManager geostatUserDomainManager, UserDomainManager userDomainManager)
         {
             _geostatUserDomainManager = geostatUserDomainManager;
             _userDomainManager = userDomainManager;
-        } 
+        }
 
         public async Task<string> FindUserId(AuthorisationUserDTO userDTO)
         {
@@ -32,49 +27,57 @@ namespace GeoStat.BussinessLogic
             return userResult.Id;
         }
 
-        public async Task<string> Authorise(AuthorisationUserDTO userDTO)
+        public async Task<Response> Authorise(AuthorisationUserDTO userDTO)
         {
             var userResult = await _userDomainManager.FindByNameAsync(userDTO.Email);
 
             if (userResult == null)
             {
-                return "user not found";
+                return new Response(Responses.UserNotFound, "user not found");
             }
 
             if (_userDomainManager.CheckPassword(userResult, userDTO.Password))
             {
-                return "ok";
+                return new Response(Responses.Success, string.Empty);
             }
             else
             {
-                return "invalid password";
+                return new Response(Responses.InvalidPassword, "invalid password");
             }
         }
 
-        public async Task<string> Register(AuthorisationUserDTO userDTO)
+        public async Task<Response> Register(AuthorisationUserDTO userDTO)
         {
-            var userResult = await _userDomainManager.CreateAsync(new User { UserName = userDTO.Email,
-                                                                    Email = userDTO.Email }, userDTO.Password);
-            if(userResult.Errors.Count() != 0)
+            var customUser = new User
             {
-                string response = String.Empty;
-                foreach (var item in userResult.Errors)
-                {
-                    response += item + " ";
-                }
-                return response;
-            }
-            
-            var user =  _userDomainManager.FindByName(userDTO.Email);
+                UserName = userDTO.Email,
+                Email = userDTO.Email
+            };
 
-            var geostatUserResult = await _geostatUserDomainManager.InsertAsync(new GeoStatUserDto { Email = userDTO.Email, UserId = user.Id });
+            var userResult = await _userDomainManager.CreateAsync(customUser, userDTO.Password);
+
+            if (userResult.Errors.Any())
+            {
+                var errors = string.Join(" ", userResult.Errors);
+                return new Response(Responses.ModelErrors, errors);
+            }
+
+            var user = _userDomainManager.FindByName(userDTO.Email);
+
+            var geostatUserDto = new GeoStatUserDto
+            {
+                Email = userDTO.Email,
+                UserId = user.Id
+            };
+
+            var geostatUserResult = await _geostatUserDomainManager.InsertAsync(geostatUserDto);
             var geostatUserId = _geostatUserDomainManager.FindByName(userDTO.Email).Queryable.First().Id;
 
             user.GeoStatUser_Id = geostatUserId;
 
-            var userres = await _userDomainManager.UpdateAsync(user);
+            await _userDomainManager.UpdateAsync(user);
 
-            return "ok";
+            return new Response(Responses.Success, string.Empty);
         }
     }
 }

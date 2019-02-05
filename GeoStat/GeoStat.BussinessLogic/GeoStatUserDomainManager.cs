@@ -1,4 +1,5 @@
-﻿using GeoStat.DataAccess;
+﻿using GeoStat.BussinessLogic.Interfaces;
+using GeoStat.DataAccess;
 using GeoStat.DTO;
 using GeoStat.Entities;
 using System.Net.Http;
@@ -7,7 +8,7 @@ using System.Web.Http;
 
 namespace GeoStat.BussinessLogic
 {
-    public class GeoStatUserDomainManager : BaseDomainManager<GeoStatUserDto, GeoStatUser>
+    public class GeoStatUserDomainManager : BaseDomainManager<GeoStatUserDto, GeoStatUser>, IGeoStatUserDomainManager 
     {
         public GeoStatUserDomainManager(
             GeoStatContext geoStatContext,

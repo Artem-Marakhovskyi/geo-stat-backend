@@ -53,11 +53,7 @@ namespace GeoStat.WebAPI.Controllers
 
                 var registratedUserId = await _accountDomainManager.FindUserId(model);
 
-                var tokenGenerator = new TokenGenerator();
-                var token = tokenGenerator.GenerateToken(model.Email, registratedUserId);
-
-                var jsonGenerator = new JsonGenerator();
-                var json = jsonGenerator.GenerateJson(token);
+                var json = new TokenizedResponse().CreateTokenizedResponse(model.Email, registratedUserId);
 
                 return Request.CreateResponse(HttpStatusCode.OK, json);
             }
@@ -84,11 +80,7 @@ namespace GeoStat.WebAPI.Controllers
 
                 var authorisedUserId = await _accountDomainManager.FindUserId(model);
 
-                var tokenGenerator = new TokenGenerator();
-                var token = tokenGenerator.GenerateToken(model.Email, authorisedUserId);
-
-                var jsonGenerator = new JsonGenerator();
-                var json = jsonGenerator.GenerateJson(token);
+                var json = new TokenizedResponse().CreateTokenizedResponse(model.Email, authorisedUserId);
 
                 return Request.CreateResponse(HttpStatusCode.OK, json);
             }

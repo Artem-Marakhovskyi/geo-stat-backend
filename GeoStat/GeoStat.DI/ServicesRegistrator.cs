@@ -6,6 +6,7 @@ using GeoStat.BussinessLogic;
 using GeoStat.BussinessLogic.Interfaces;
 using GeoStat.CrossCutting.Logger;
 using GeoStat.DataAccess;
+using GeoStat.DI;
 using GeoStat.DTO;
 using GeoStat.Entities;
 using Microsoft.AspNet.Identity;
@@ -21,23 +22,10 @@ namespace GeoStat.IoC
         public void Register(ContainerBuilder builder)
         {
             RegisterLogger(builder);
-            ConfigureMapper();
+            MapperConfig.InitializeMapper();
             RegisterContext(builder);
             RegisterDomainManagers(builder);
         }
-
-        private void ConfigureMapper()
-        {
-            Mapper.Initialize(
-                c => 
-                {
-                    c.CreateMap<LocationDto, Location>().ReverseMap();
-                    c.CreateMap<GeoStatUserDto, GeoStatUser>().ReverseMap();
-                    c.CreateMap<GroupDto, Group>().ReverseMap();
-                    c.CreateMap<GroupUserDto, GroupUser>().ReverseMap();
-                });
-        }
-
         private void RegisterDomainManagers(ContainerBuilder builder)
         {
             builder.RegisterType<LocationDomainManager>().As<IDomainManager<LocationDto>>();

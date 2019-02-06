@@ -18,7 +18,7 @@ namespace GeoStat.WebAPI.Models
 
         readonly System.IdentityModel.Tokens.SecurityKey signingKey = new InMemorySymmetricSecurityKey(Encoding.UTF8.GetBytes(communicationKey));
 
-        public string GenerateToken(string userName, string userId)
+        public string GenerateToken(string userName)
         {
             var signingKey = new InMemorySymmetricSecurityKey(Encoding.UTF8.GetBytes(communicationKey));
             var now = DateTime.UtcNow;
@@ -27,8 +27,8 @@ namespace GeoStat.WebAPI.Models
 
             var claimsIdentity = new ClaimsIdentity(new List<Claim>()
             {
-                new Claim(ClaimTypes.Name, userName),
-                new Claim(ClaimTypes.NameIdentifier, userId)
+                new Claim(ClaimTypes.Name, userName)
+                //new Claim(ClaimTypes.NameIdentifier, userId)
             });
 
             var securityTokenDescriptor = new System.IdentityModel.Tokens.SecurityTokenDescriptor()

@@ -24,19 +24,9 @@ namespace GeoStat.IoC
             RegisterLogger(builder);
             MapperConfig.InitializeMapper();
             RegisterContext(builder);
-            RegisterDomainManagers(builder);
+            DomainManagersRegistrator.Register(builder);
         }
-        private void RegisterDomainManagers(ContainerBuilder builder)
-        {
-            builder.RegisterType<LocationDomainManager>().As<IDomainManager<LocationDto>>();
-            builder.RegisterType<GeoStatUserDomainManager>().As<IGeoStatUserDomainManager>();
-            builder.RegisterType<GroupUserDomainManager>().As<IDomainManager<GroupUserDto>>();
-            builder.RegisterType<GroupDomainManager>().As<IDomainManager<GroupDto>>();
-            builder.RegisterType<AccountDomainManager>().As<IAccountDomainManager>();
-            builder.RegisterType<UserDomainManager>().As<UserDomainManager>();
-            builder.RegisterType<CustomUserStore>().As<IUserStore<User>>();
-        }
-
+       
         private void RegisterContext(ContainerBuilder builder)
         {
             var connectionString 

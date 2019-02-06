@@ -1,11 +1,15 @@
 ﻿using System.Configuration;
+using System.Data.Entity;
 using Autofac;
 using AutoMapper;
 using GeoStat.BussinessLogic;
+using GeoStat.BussinessLogic.Interfaces;
 using GeoStat.CrossCutting.Logger;
 using GeoStat.DataAccess;
 using GeoStat.DTO;
 using GeoStat.Entities;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Azure.Mobile.Server.Tables;
 using Microsoft.Extensions.Logging;
 using NLog.Extensions.Logging;
@@ -37,9 +41,12 @@ namespace GeoStat.IoC
         private void RegisterDomainManagers(ContainerBuilder builder)
         {
             builder.RegisterType<LocationDomainManager>().As<IDomainManager<LocationDto>>();
-            builder.RegisterType<GeoStatUserDomainManager>().As<IDomainManager<GeoStatUserDto>>();
+            builder.RegisterType<GeoStatUserDomainManager>().As<IGeoStatUserDomainManager>();
             builder.RegisterType<GroupUserDomainManager>().As<IDomainManager<GroupUserDto>>();
             builder.RegisterType<GroupDomainManager>().As<IDomainManager<GroupDto>>();
+            builder.RegisterType<AccountDomainManager>().As<IAccountDomainManager>();
+            builder.RegisterType<UserDomainManager>().As<UserDomainManager>();
+            builder.RegisterType<CustomUserStore>().As<IUserStore<User>>();
         }
 
         private void RegisterContext(ContainerBuilder builder)

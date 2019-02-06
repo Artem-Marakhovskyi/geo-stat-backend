@@ -10,6 +10,7 @@
     <ProjectReference Include="..\GeoStat.DTO\GeoStat.DTO.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNet.Identity.Owin" Version="2.2.2" />
     <PackageReference Include="Microsoft.Azure.Mobile.Server.Tables" Version="2.0.3" />
     <PackageReference Include="Microsoft.Azure.Mobile.Server.Entity" Version="2.0.3" />
   </ItemGroup>

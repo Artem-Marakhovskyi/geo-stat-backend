@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.IdentityModel.Tokens;
 using System.Linq;
-using System.Net.Http;
 using System.Text;
 using System.Web;
 using System.Web.Http;
@@ -34,15 +33,12 @@ namespace GeoStat.WebAPI.Models
                     };
                     if (DateTime.Now < tokenSecure.ValidTo)
                     {
-                        //actionContext.Response = new HttpResponseMessage(System.Net.HttpStatusCode.Accepted);
-                    }
-                    else
-                    {
-                        actionContext.Response = new HttpResponseMessage(System.Net.HttpStatusCode.Unauthorized);
+                        ///redirecttoaction 
                     }
                 }
+                //return 
             }
-            //OnActionExecuting(actionContext);
+            OnActionExecuting(actionContext);
         }
     }
 }

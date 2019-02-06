@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using System.Web.Http;
 using GeoStat.DTO;
-using GeoStat.WebAPI.Models;
 using Microsoft.Azure.Mobile.Server.Tables;
 
 namespace GeoStat.WebAPI.Controllers
@@ -15,17 +14,15 @@ namespace GeoStat.WebAPI.Controllers
         {
         }
 
-        [AuthorisedIn]
         [HttpPost]
-        public async Task<IHttpActionResult> Post([FromBody]GroupDto item, string token)
+        public async Task<IHttpActionResult> Post([FromBody]GroupDto item)
         {
             var location = await DomainManager.InsertAsync(item);
             return this.Ok(location);
         }
 
-        [AuthorisedIn]
         [HttpGet]
-        public IQueryable<GroupDto> Get(string token)
+        public IQueryable<GroupDto> Get()
         {
             return this.Query();
         }

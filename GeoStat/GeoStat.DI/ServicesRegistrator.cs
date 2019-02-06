@@ -8,6 +8,7 @@ using GeoStat.DTO;
 using GeoStat.Entities;
 using Microsoft.Azure.Mobile.Server.Tables;
 using Microsoft.Extensions.Logging;
+using NLog.Extensions.Logging;
 
 namespace GeoStat.IoC
 {
@@ -55,7 +56,8 @@ namespace GeoStat.IoC
 
         private void RegisterLogger(ContainerBuilder builder)
         {
-            var logger = GeoStatLogger.Factory.CreateLogger("GeoStat");
+            NLog.LogManager.LoadConfiguration("nlog.config");
+            var logger = new NLogLoggerFactory().CreateLogger("GeoStat");
             builder.RegisterInstance(logger).As<ILogger>();
             builder.RegisterType<GeoStatLogger>().As<IGeoStatLogger>().InstancePerRequest();
         }

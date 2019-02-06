@@ -288,8 +288,9 @@
     <Compile Include="Controllers\GroupUserController.cs" />
     <Compile Include="Controllers\GroupController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
-    <Compile Include="Models\AuthorisedInAttribute.cs" />
+    <Compile Include="Models\TokenChecker.cs" />
     <Compile Include="Models\JsonGenerator.cs" />
+    <Compile Include="Models\TokenGenerationResponses.cs" />
     <Compile Include="Models\TokenGenerator.cs" />
     <Compile Include="Models\TokenizedResponse.cs" />
     <Compile Include="Global.asax.cs">

@@ -8,11 +8,11 @@ namespace GeoStat.WebAPI.Models
 {
     public class JsonGenerator
     {
-        public JObject GenerateJson (string accessToken, string refreshToken)
+        public JObject GenerateJson (string token, string userId)
         {
             JObject json = new JObject(
-                    new JProperty("accessToken", accessToken),
-                    new JProperty("refreshToken", refreshToken));
+                    new JProperty("token", token),
+                    new JProperty("userId", userId));
             return json;
         }
     }

@@ -11,10 +11,10 @@ namespace GeoStat.WebAPI.Models
         public JObject CreateTokenizedResponse(string email, string id)
         {
             var tokenGenerator = new TokenGenerator();
-            var token = tokenGenerator.GenerateToken(email);
+            var token = tokenGenerator.GenerateToken(email, id);
 
             var jsonGenerator = new JsonGenerator();
-            var json = jsonGenerator.GenerateJson(token,id);
+            var json = jsonGenerator.GenerateJson(token);
 
             return json;
         }

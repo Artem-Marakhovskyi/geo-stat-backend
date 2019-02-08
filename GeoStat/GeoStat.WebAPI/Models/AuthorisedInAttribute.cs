@@ -20,25 +20,20 @@ namespace GeoStat.WebAPI.Models
                 var token = actionContext.ActionArguments.First().Value.ToString();
                 if (token != null)
                 {
-                    string secret = "GQDstc21ewfffffffffffFiwDffVvVBrk";
-                    var key = Encoding.ASCII.GetBytes(secret);
+                    var tokenGenerator = new TokenGenerator();
                     var handler = new JwtSecurityTokenHandler();
-                    var tokenSecure = handler.ReadToken(token) as SecurityToken;
-                    var validations = new TokenValidationParameters
+                    var tokenSecure = handler.ReadToken(token) as JwtSecurityToken;
+                    if (DateTime.Now > tokenSecure.ValidTo)
                     {
-                        ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new InMemorySymmetricSecurityKey(key),
-                        ValidateIssuer = false,
-                        ValidateAudience = false
-                    };
-                    if (DateTime.Now < tokenSecure.ValidTo)
+                        throw new Exception("TOKEN EXPIRED");
+                    }
+                    else
                     {
-                        ///redirecttoaction 
+                        var tokenValidator = new TokenValidator();
+                        var result = tokenValidator.ValidateToken(token);
                     }
                 }
-                //return 
             }
-            OnActionExecuting(actionContext);
         }
     }
 }

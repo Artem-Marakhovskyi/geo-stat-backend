@@ -31,6 +31,10 @@ namespace GeoStat.WebAPI.Models
                     {
                         var tokenValidator = new TokenValidator();
                         var result = tokenValidator.ValidateToken(token);
+                        if(!result)
+                        {
+                            throw new Exception("TOKEN INVALID");
+                        }
                     }
                 }
             }

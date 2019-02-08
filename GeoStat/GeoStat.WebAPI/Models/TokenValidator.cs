@@ -17,7 +17,7 @@ namespace GeoStat.WebAPI.Models
             var userName = tokenSecure.Claims.First().Value;
             var userId = tokenSecure.Claims.Skip(1).First().Value;
 
-            return token != tokenGenerator.GenerateToken(userName, userId, tokenSecure.ValidFrom, tokenSecure.ValidTo);
+            return token == tokenGenerator.GenerateToken(userName, userId, tokenSecure.ValidFrom, tokenSecure.ValidTo);
         }
     }
 }

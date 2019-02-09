@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>net461</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,8 +17,6 @@
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="4.0.3.308261200" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="System.IdentityModel">
-      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.IdentityModel.dll</HintPath>
-    </Reference>
+    <Reference Include="System.IdentityModel" />
   </ItemGroup>
 </Project>

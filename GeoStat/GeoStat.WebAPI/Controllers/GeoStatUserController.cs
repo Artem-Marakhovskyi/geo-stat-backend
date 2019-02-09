@@ -1,13 +1,13 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
-using GeoStat.BussinessLogic;
 using GeoStat.BussinessLogic.Interfaces;
 using GeoStat.DTO;
-using Microsoft.Azure.Mobile.Server.Tables;
+using GeoStat.WebAPI.Filters;
 
 namespace GeoStat.WebAPI.Controllers
 {
+    [AuthorisedIn]
     public class GeoStatUserController : BaseController<GeoStatUserDto>
     {
         public GeoStatUserController(

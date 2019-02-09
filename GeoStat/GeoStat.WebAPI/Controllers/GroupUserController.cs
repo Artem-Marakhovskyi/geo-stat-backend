@@ -2,11 +2,12 @@
 using System.Threading.Tasks;
 using System.Web.Http;
 using GeoStat.DTO;
-using GeoStat.WebAPI.Models;
+using GeoStat.WebAPI.Filters;
 using Microsoft.Azure.Mobile.Server.Tables;
 
 namespace GeoStat.WebAPI.Controllers
 {
+    [AuthorisedIn]
     public class GroupUserController : BaseController<GroupUserDto>
     {
         public GroupUserController(
@@ -22,7 +23,6 @@ namespace GeoStat.WebAPI.Controllers
             return this.Ok(location);
         }
 
-        [AuthorisedIn]
         [HttpGet]
         public IQueryable<GroupUserDto> Get(string token)
         {

@@ -1,25 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Http;
-using GeoStat.BussinessLogic;
-using GeoStat.BussinessLogic.Interfaces;
-using GeoStat.DataAccess;
+using GeoStat.BussinessLogic.Access;
 using GeoStat.DTO;
-using GeoStat.Entities;
-using static GeoStat.BussinessLogic.Helpers.Response;
-using GeoStat.WebAPI.Models;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Azure.Mobile.Server.Tables;
-using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace GeoStat.WebAPI.Controllers
 {
@@ -27,12 +13,7 @@ namespace GeoStat.WebAPI.Controllers
     public class AccountController : ApiController
     {
         private readonly IAccountDomainManager _accountDomainManager;
-
-        public AccountController()
-        {
-
-        }
-
+        
         public AccountController(IAccountDomainManager accountDomainManager)
         {
             _accountDomainManager = accountDomainManager;
@@ -40,22 +21,25 @@ namespace GeoStat.WebAPI.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        [Route("api/account/register/post")]
+        [Route("api/account/register")]
         public async Task<HttpResponseMessage> Register([FromBody]UserDTO model)
         {
             if(ModelState.IsValid)
             {
-                var registration = await _accountDomainManager.Register(model);
-                if (registration.CustomResponse != Responses.Success)
+                try
                 {
-                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, registration.ResponseString);
+                    var registerResult = await _accountDomainManager.Register(model);
+
+                    return Request.CreateResponse(
+                        HttpStatusCode.OK, 
+                        JsonConvert.SerializeObject(registerResult));
                 }
-
-                var registratedUserId = await _accountDomainManager.FindUserId(model);
-
-                var json = new TokenizedResponse().CreateTokenizedResponse(model.Email, registratedUserId);
-
-                return Request.CreateResponse(HttpStatusCode.OK, json);
+                catch (InvalidOperationException ex)
+                {
+                    return Request.CreateErrorResponse(
+                        HttpStatusCode.BadRequest,
+                        ex);
+                }
             }
             else
             {
@@ -65,24 +49,25 @@ namespace GeoStat.WebAPI.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        [Route("api/account/authorise/post")]
+        [Route("api/account/auth")]
         public async Task<HttpResponseMessage> Authorise([FromBody]AuthorisationUserDTO model)
         {
-
             if(ModelState.IsValid)
             {
-                var authorisation = await _accountDomainManager.Authorise(model);
-
-                if (authorisation.CustomResponse != Responses.Success)
+                try
                 {
-                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, authorisation.ResponseString);
+                    var authResult = await _accountDomainManager.Authorise(model);
+
+                    return Request.CreateResponse(
+                        HttpStatusCode.OK,
+                        JsonConvert.SerializeObject(authResult));
                 }
-
-                var authorisedUserId = await _accountDomainManager.FindUserId(model);
-
-                var json = new TokenizedResponse().CreateTokenizedResponse(model.Email, authorisedUserId);
-
-                return Request.CreateResponse(HttpStatusCode.OK, json);
+                catch (InvalidOperationException ex)
+                {
+                    return Request.CreateBadRequestResponse(
+                        "Error while authorization process",
+                        ex);
+                }
             }
             else
             {

@@ -3,6 +3,7 @@ using System.Data.Entity;
 using Autofac;
 using AutoMapper;
 using GeoStat.BussinessLogic;
+using GeoStat.BussinessLogic.Access;
 using GeoStat.BussinessLogic.Interfaces;
 using GeoStat.CrossCutting.Logger;
 using GeoStat.DataAccess;
@@ -44,8 +45,10 @@ namespace GeoStat.IoC
             builder.RegisterType<GroupUserDomainManager>().As<IDomainManager<GroupUserDto>>();
             builder.RegisterType<GroupDomainManager>().As<IDomainManager<GroupDto>>();
             builder.RegisterType<AccountDomainManager>().As<IAccountDomainManager>();
-            builder.RegisterType<UserDomainManager>().As<UserDomainManager>();
+            builder.RegisterType<UserIdentityDomainManager>().As<UserIdentityDomainManager>();
             builder.RegisterType<CustomUserStore>().As<IUserStore<User>>();
+            builder.RegisterType<TokenManager>().As<ITokenManager>();
+
         }
 
         private void RegisterContext(ContainerBuilder builder)

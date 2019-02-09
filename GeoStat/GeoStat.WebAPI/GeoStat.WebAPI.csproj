@@ -282,18 +282,16 @@
     <Compile Include="Controllers\GroupUserController.cs" />
     <Compile Include="Controllers\GroupController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
-    <Compile Include="Models\AuthorisedInAttribute.cs" />
-    <Compile Include="Models\JsonGenerator.cs" />
-    <Compile Include="Models\TokenGenerator.cs" />
-    <Compile Include="Models\TokenizedResponse.cs" />
+    <Compile Include="Filters\AuthorisedInAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\TokenValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Controllers\LocationController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Swagger\AuthHeaderParameter.cs" />
+    <Compile Include="Swagger\ODataParameter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

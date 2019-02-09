@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GeoStat.CrossCutting\GeoStat.CrossCutting.csproj" />
     <ProjectReference Include="..\GeoStat.Entities\GeoStat.Entities.csproj" />
     <ProjectReference Include="..\GeoStat.DataAccess\GeoStat.DataAccess.csproj" />
     <ProjectReference Include="..\GeoStat.DTO\GeoStat.DTO.csproj" />
@@ -13,5 +14,11 @@
     <PackageReference Include="Microsoft.AspNet.Identity.Owin" Version="2.2.2" />
     <PackageReference Include="Microsoft.Azure.Mobile.Server.Tables" Version="2.0.3" />
     <PackageReference Include="Microsoft.Azure.Mobile.Server.Entity" Version="2.0.3" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="4.0.3.308261200" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.IdentityModel">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.IdentityModel.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>

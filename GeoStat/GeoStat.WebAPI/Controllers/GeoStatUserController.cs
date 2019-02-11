@@ -1,6 +1,8 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
+using GeoStat.BussinessLogic;
+using GeoStat.BussinessLogic.Interfaces;
 using GeoStat.DTO;
 using Microsoft.Azure.Mobile.Server.Tables;
 
@@ -9,7 +11,7 @@ namespace GeoStat.WebAPI.Controllers
     public class GeoStatUserController : BaseController<GeoStatUserDto>
     {
         public GeoStatUserController(
-            IDomainManager<GeoStatUserDto> manager)
+            IGeoStatUserDomainManager manager)
             : base(manager)
         {
         }

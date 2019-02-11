@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using GeoStat.BussinessLogic;
+using GeoStat.BussinessLogic.Access;
 using GeoStat.BussinessLogic.Interfaces;
 using GeoStat.DTO;
 using GeoStat.Entities;
@@ -20,8 +21,9 @@ namespace GeoStat.DI
             builder.RegisterType<GroupUserDomainManager>().As<IDomainManager<GroupUserDto>>();
             builder.RegisterType<GroupDomainManager>().As<IDomainManager<GroupDto>>();
             builder.RegisterType<AccountDomainManager>().As<IAccountDomainManager>();
-            builder.RegisterType<UserDomainManager>().As<UserDomainManager>();
             builder.RegisterType<CustomUserStore>().As<IUserStore<User>>();
+            builder.RegisterType<UserIdentityDomainManager>().As<UserIdentityDomainManager>();
+            builder.RegisterType<TokenManager>().As<ITokenManager>();
         }
     }
 }

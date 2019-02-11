@@ -3,6 +3,7 @@ using System.Data.Entity;
 using Autofac;
 using AutoMapper;
 using GeoStat.BussinessLogic;
+using GeoStat.BussinessLogic.Access;
 using GeoStat.BussinessLogic.Interfaces;
 using GeoStat.CrossCutting.Logger;
 using GeoStat.DataAccess;
@@ -26,7 +27,7 @@ namespace GeoStat.IoC
             RegisterContext(builder);
             DomainManagersRegistrator.Register(builder);
         }
-       
+
         private void RegisterContext(ContainerBuilder builder)
         {
             var connectionString 

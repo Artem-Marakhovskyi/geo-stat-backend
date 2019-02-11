@@ -1,5 +1,6 @@
 using System.Web.Http;
 using System.Web.Http.Description;
+using GeoStat.WebAPI.Swagger;
 using Microsoft.Azure.Mobile.Server.Swagger;
 using Swashbuckle.Application;
 
@@ -15,9 +16,11 @@ namespace GeoStat.WebAPI
 
             configuration
                 .EnableSwagger(c =>
-                    {
-                        c.SingleApiVersion("v1", "GeoStat.WebAPI");
-                    })
+                {
+                    c.SingleApiVersion("v1", "GeoStat.WebAPI");
+                    c.OperationFilter(() => new AuthHeaderParameter());
+                    c.OperationFilter(() => new AddODataParameters());
+                })
                 .EnableSwaggerUi(c => { });
         }
     }

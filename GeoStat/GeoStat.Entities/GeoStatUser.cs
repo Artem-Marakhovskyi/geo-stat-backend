@@ -7,7 +7,6 @@ namespace GeoStat.Entities
     {
         public string Email { get; set; }
         public string UserId { get; set; }
-
         public User User { get; set; }
         public ICollection<Group> Groups { get; set; }
         public ICollection<GroupUser> GroupUsers { get; set; }

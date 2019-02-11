@@ -4,10 +4,14 @@ using GeoStat.DataAccess;
 using GeoStat.DTO;
 using GeoStat.Entities;
 using System.Linq;
+using System.Collections.Generic;
+using AutoMapper;
 
 namespace GeoStat.BussinessLogic
 {
-    public class LocationDomainManager : BaseDomainManager<LocationDto, Location>
+    public class LocationDomainManager : 
+        BaseDomainManager<LocationDto, Location>,
+        ILocationDomainManager
     {
         private GeoStatContext _geoStatContext;
 
@@ -19,60 +23,51 @@ namespace GeoStat.BussinessLogic
             _geoStatContext = geoStatContext;
         }
 
-        public IQueryable<Location> GetLocationsByUserId(string userId, string id)
+        public IEnumerable<LocationDto> GetLocationsByUserId(string tokenUserId, string id)
         {
-            if (userId == id || CheckPermissionsForGroupMember(userId, id))
+            if (tokenUserId == id || CheckPermissionsForGroupMember(tokenUserId, id))
             {
-                var locationsOfUser = _geoStatContext.Locations.Where(l => l.UserId == id);
-                return locationsOfUser;
+                var locationsOfUser = _geoStatContext
+                    .Locations
+                    .Where(l => l.UserId == id)
+                    .ToList();
+                return Mapper.Map<LocationDto[]>(locationsOfUser);
             }
 
             return null;
         }
-
-        public IQueryable<Location> GetLocationsByGroupId(string userId, string groupId)
+        //Mapper.EF
+        public IEnumerable<LocationDto> GetLocationsByGroupId(string userId, string groupId)
         {
-            if (CheckPermissionsForGroup(userId, groupId))
+            if (IsUserInGroup(userId, groupId))
             {
                 var groupMembersId = _geoStatContext.GroupUsers
                     .Where(u => u.GroupId == groupId)
                     .Select(u => u.UserId);
 
                 var locationsOfGroupMembers = _geoStatContext.Locations
-                    .Where(l => groupMembersId.Contains(l.UserId));
+                    .Where(l => groupMembersId.Contains(l.UserId))
+                    .ToList();
 
-                return locationsOfGroupMembers;
+                return Mapper.Map<LocationDto[]>(locationsOfGroupMembers);
             }
 
             return null;
         }
 
-        private bool CheckPermissionsForGroup(string userId, string groupId)
+        private bool IsUserInGroup(string userId, string groupId)
         {
-            var groupUsersId = _geoStatContext.GroupUsers
+            return _geoStatContext.GroupUsers
                 .Where(u => u.GroupId == groupId)
-                .Select(u => u.UserId);
-
-            if (groupUsersId.Contains(userId)) return true;
-
-            return false;
+                .Select(u => u.UserId)
+                .Contains(userId);
         }
 
-        private bool CheckPermissionsForGroupMember(string userId, string groupMemberId)
-        {
-            var groupsOfMember = _geoStatContext.GroupUsers
+        private bool CheckPermissionsForGroupMember(string tokenUserId, string groupMemberId)
+            => _geoStatContext
+                .GroupUsers
                 .Where(u => u.UserId == groupMemberId)
-                .Select(u => u.GroupId);
-
-            foreach (var groupId in groupsOfMember)
-            {
-                if (CheckPermissionsForGroup(userId, groupId))
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
+                .Select(u => u.GroupId)
+                .Any(groupId => IsUserInGroup(tokenUserId, groupId));
     } 
 }

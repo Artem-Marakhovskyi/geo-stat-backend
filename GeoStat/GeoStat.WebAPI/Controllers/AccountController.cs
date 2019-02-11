@@ -31,8 +31,8 @@ namespace GeoStat.WebAPI.Controllers
                     var registerResult = await _accountDomainManager.Register(model);
 
                     return Request.CreateResponse(
-                        HttpStatusCode.OK, 
-                        JsonConvert.SerializeObject(registerResult));
+                        HttpStatusCode.OK,
+                        registerResult);
                 }
                 catch (InvalidOperationException ex)
                 {
@@ -60,7 +60,7 @@ namespace GeoStat.WebAPI.Controllers
 
                     return Request.CreateResponse(
                         HttpStatusCode.OK,
-                        JsonConvert.SerializeObject(authResult));
+                        authResult);
                 }
                 catch (InvalidOperationException ex)
                 {

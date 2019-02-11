@@ -24,7 +24,7 @@ namespace GeoStat.WebAPI.Controllers
         }
 
         [HttpGet]
-        public IQueryable<GroupUserDto> Get(string token)
+        public IQueryable<GroupUserDto> Get()
         {
             return this.Query();
         }

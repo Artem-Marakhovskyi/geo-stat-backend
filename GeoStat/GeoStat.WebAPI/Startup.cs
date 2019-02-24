@@ -24,7 +24,7 @@ namespace GeoStat.WebAPI
             appBuilder.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                LoginPath = new PathString("/Account/Login"),
+                LoginPath = new PathString(string.Empty),
             });
 
             SwaggerConfig.Register(config);

@@ -9,10 +9,10 @@ using SecurityAlgorithms = System.IdentityModel.Tokens.SecurityAlgorithms;
 namespace GeoStat.BussinessLogic.Access
 {
     public class TokenManager : ITokenManager
-    { 
+    {
         private const string communicationKey = "GQDstc21ewfffffffffffFiwDffVvVBrk";
 
-        private readonly SigningCredentials _signingCredentials 
+        private readonly SigningCredentials _signingCredentials
             = new SigningCredentials(
                 new InMemorySymmetricSecurityKey(
                     Encoding.UTF8.GetBytes(communicationKey)),
@@ -21,11 +21,11 @@ namespace GeoStat.BussinessLogic.Access
 
         private readonly JwtSecurityTokenHandler _tokenHandler
             = new JwtSecurityTokenHandler();
-        
+
         public string GenerateToken(
-            string userName, 
-            string userId, 
-            DateTime? notBefore = null, 
+            string userName,
+            string userId,
+            DateTime? notBefore = null,
             DateTime? expires = null)
         {
             var jwt = new JwtSecurityToken(
@@ -40,16 +40,24 @@ namespace GeoStat.BussinessLogic.Access
 
         public bool Validate(string token)
         {
-            var tokenSecure = _tokenHandler.ReadToken(token) as JwtSecurityToken;
-            
-            var userName = tokenSecure.Claims.First().Value;
-            var userId = tokenSecure.Claims.Skip(1).First().Value;
+            try
+            {
+                var tokenSecure = _tokenHandler.ReadToken(token) as JwtSecurityToken;
 
-            return token == GenerateToken(
-                userName, 
-                userId, 
-                tokenSecure.ValidFrom, 
-                tokenSecure.ValidTo);
+                var userName = tokenSecure.Claims.First().Value;
+                var userId = tokenSecure.Claims.Skip(1).First().Value;
+
+                return token == GenerateToken(
+                    userName,
+                    userId,
+                    tokenSecure.ValidFrom,
+                    tokenSecure.ValidTo);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
         }
 
         private IEnumerable<Claim> GetClaims(

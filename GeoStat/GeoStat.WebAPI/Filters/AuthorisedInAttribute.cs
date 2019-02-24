@@ -11,6 +11,7 @@ namespace GeoStat.WebAPI.Filters
         protected override bool IsAuthorized(HttpActionContext actionContext)
         {
             var hasHeaders = actionContext.Request.Headers.TryGetValues("GEOSTAT_AUTH", out var list);
+
             if (!hasHeaders || list.Count() != 1)
             {
                 return false;
@@ -26,6 +27,15 @@ namespace GeoStat.WebAPI.Filters
             var token = list.First();
 
             return tokenManager.Validate(token);
+        }
+
+        protected override void HandleUnauthorizedRequest(HttpActionContext actionContext)
+        {
+            actionContext.Response = new HttpResponseMessage
+            {
+                StatusCode = System.Net.HttpStatusCode.Unauthorized,
+                Content = new StringContent("You are unauthorized to access this resource")
+            };
         }
     }
 }

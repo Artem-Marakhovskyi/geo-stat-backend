@@ -15,12 +15,11 @@ namespace GeoStat.DI
     {
         public static void Register(ContainerBuilder builder)
         {
-            builder.RegisterType<LocationDomainManager>().As<IDomainManager<LocationDto>>();
             builder.RegisterType<GeoStatUserDomainManager>().As<IGeoStatUserDomainManager>();
+            builder.RegisterType<LocationDomainManager>().As<ILocationDomainManager>();
             builder.RegisterType<GroupUserDomainManager>().As<IDomainManager<GroupUserDto>>();
-            builder.RegisterType<GroupDomainManager>().As<IDomainManager<GroupDto>>();
+            builder.RegisterType<GroupDomainManager>().As<IGroupDomainManager>();
             builder.RegisterType<AccountDomainManager>().As<IAccountDomainManager>();
-            builder.RegisterType<UserDomainManager>().As<UserDomainManager>();
             builder.RegisterType<CustomUserStore>().As<IUserStore<User>>();
         }
     }

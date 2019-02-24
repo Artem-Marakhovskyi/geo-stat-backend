@@ -6,6 +6,8 @@ using GeoStat.Entities;
 using System.Linq;
 using System.Collections.Generic;
 using AutoMapper;
+using System.Linq.Expressions;
+using System;
 
 namespace GeoStat.BussinessLogic
 {
@@ -13,7 +15,7 @@ namespace GeoStat.BussinessLogic
         BaseDomainManager<LocationDto, Location>,
         ILocationDomainManager
     {
-        private GeoStatContext _geoStatContext;
+        private readonly GeoStatContext _geoStatContext;
 
         public LocationDomainManager(
             GeoStatContext geoStatContext,
@@ -39,8 +41,8 @@ namespace GeoStat.BussinessLogic
         //Mapper.EF
         public IEnumerable<LocationDto> GetLocationsByGroupId(string userId, string groupId)
         {
-            if (IsUserInGroup(userId, groupId))
-            {
+            //if (IsUserInGroup(userId, groupId))
+            //{
                 var groupMembersId = _geoStatContext.GroupUsers
                     .Where(u => u.GroupId == groupId)
                     .Select(u => u.UserId);
@@ -50,14 +52,14 @@ namespace GeoStat.BussinessLogic
                     .ToList();
 
                 return Mapper.Map<LocationDto[]>(locationsOfGroupMembers);
-            }
+            //}
 
-            return null;
+           // return null;
         }
 
-        private bool IsUserInGroup(string userId, string groupId)
+        private Expression<Func<string, bool>> IsUserInGroup(string userId)
         {
-            return _geoStatContext.GroupUsers
+            return (groupId) => _geoStatContext.GroupUsers
                 .Where(u => u.GroupId == groupId)
                 .Select(u => u.UserId)
                 .Contains(userId);
@@ -68,6 +70,6 @@ namespace GeoStat.BussinessLogic
                 .GroupUsers
                 .Where(u => u.UserId == groupMemberId)
                 .Select(u => u.GroupId)
-                .Any(groupId => IsUserInGroup(tokenUserId, groupId));
+                .Any(IsUserInGroup(tokenUserId));
     } 
 }

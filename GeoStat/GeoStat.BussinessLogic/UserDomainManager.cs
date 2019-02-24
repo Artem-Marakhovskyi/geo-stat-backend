@@ -1,22 +1,21 @@
 ﻿using GeoStat.DataAccess;
-using GeoStat.DTO;
 using GeoStat.Entities;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
+using System.Web;
 
 namespace GeoStat.BussinessLogic
 {
-    public class GeoStatUserDomainManager : BaseDomainManager<GeoStatUserDto, GeoStatUser>
+    public class UserDomainManager : UserManager<User>
     {
-        private readonly GeoStatContext _geoStatContext;
-
-        public GeoStatUserDomainManager(
-            GeoStatContext geoStatContext,
-            HttpRequestMessage requestMessage)
-            : base(geoStatContext, requestMessage)
+        public UserDomainManager(IUserStore<User> store)
+                : base(store)
         {
-            _geoStatContext = geoStatContext;
         }
     }
 }

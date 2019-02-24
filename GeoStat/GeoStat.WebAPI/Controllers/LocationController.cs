@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using GeoStat.BussinessLogic;
@@ -32,10 +33,10 @@ namespace GeoStat.WebAPI.Controllers
 
         [HttpGet]
         [Route("Location/{userId}")]
-        public IQueryable<LocationDto> GetById(string userId)
+        public IEnumerable<LocationDto> GetById(string userId)
         {
-            var locations = _locationDomainManager.GetLocationsByUserId("142b45ad60c94d61811f1849fd1c5559", userId);
-            return null;
+            //this.RequestContext.Principal
+            return _locationDomainManager.GetLocationsByUserId("092647ed476d404f8b9fabd5f0109a22", userId);
         }
     }
 }
